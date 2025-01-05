@@ -22,6 +22,11 @@ class MainWidget extends StatelessWidget {
           tertiary: Color(0xFF007FFF),
         ),
         fontFamily: GoogleFonts.urbanist().fontFamily,
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xFFC6CFDC),
+          selectionColor: Color(0xFFC6CFDC),
+          selectionHandleColor: Color(0xFFC6CFDC),
+        ),
         textTheme: Theme.of(context).textTheme.apply(
           bodyColor: Color(0xFF3F3D56),
           displayColor: Color(0xFF3F3D56),

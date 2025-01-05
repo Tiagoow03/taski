@@ -23,7 +23,7 @@ class CardTaskWidget extends StatelessWidget {
       margin: EdgeInsets.only(
         left: kPaddingDefault,
         right: kPaddingDefault,
-        top: isFirst ? 0 : kPaddingDefault,
+        top: isFirst ? kPaddingDefault / 4 : kPaddingDefault,
         bottom: isLast ? kPaddingDefault * 2 : 0,
       ),
       padding: const EdgeInsets.all(kPaddingDefault),

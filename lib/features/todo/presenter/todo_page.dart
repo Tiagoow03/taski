@@ -35,7 +35,7 @@ class _TodoPageState extends State<TodoPage> {
       spacing: kPaddingDefault,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: kPaddingDefault, top: kPaddingDefault),
+          padding: const EdgeInsets.symmetric(horizontal: kPaddingDefault, vertical: kPaddingDefault / 2),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: kPaddingDefault / 3,
@@ -57,7 +57,7 @@ class _TodoPageState extends State<TodoPage> {
                 ),
               ),
               Text(
-                'You’ve got 7 tasks to do.',
+                'You’ve got ${_handler.store.tasks.length} tasks to do.',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -71,7 +71,9 @@ class _TodoPageState extends State<TodoPage> {
           child: Stack(
             children: [
               if (_handler.store.tasks.isEmpty)
-                EmptyTaskWidget()
+                EmptyTaskWidget(
+                  onCreateTask: () {},
+                )
               else
                 ListView.builder(
                   itemCount: _handler.store.tasks.length,

@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taski/utils/constants.dart';
 
 class EmptyTaskWidget extends StatelessWidget {
-  const EmptyTaskWidget({super.key});
+  const EmptyTaskWidget({
+    super.key,
+    required this.onCreateTask,
+  });
+
+  final void Function() onCreateTask;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class EmptyTaskWidget extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: onCreateTask,
             style: ElevatedButton.styleFrom(
               elevation: 0,
               backgroundColor: Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.1),
