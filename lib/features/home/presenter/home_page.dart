@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/features/home/widgets/app_bar.dart';
-import 'package:taski/features/home/widgets/create_dropdown.dart';
-import 'package:taski/features/home/widgets/item_bar.dart';
+import 'package:taski/core/app_store/app_store.dart';
+import 'package:taski/features/home/presenter/widgets/app_bar.dart';
+import 'package:taski/features/home/presenter/widgets/item_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AppStore _appStore = Modular.get();
+
   @override
   void initState() {
     super.initState();
@@ -19,13 +21,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _appStore.setContext(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(),
       body: RouterOutlet(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Theme.of(context).colorScheme.primaryContainer, width: 2)),
+          border: Border(
+            top: BorderSide(color: Theme.of(context).colorScheme.primaryContainer, width: 2),
+          ),
         ),
         child: BottomAppBar(
           child: Row(
@@ -41,12 +47,7 @@ class _HomePageState extends State<HomePage> {
                 label: 'Todo',
               ),
               ItemNavigationBar(
-                onTap: () => showModalBottomSheet(
-                  context: context,
-                  isDismissible: true,
-                  barrierColor: Colors.transparent,
-                  builder: (_) => const CreateDropdown(),
-                ),
+                onTap: () => _appStore.openCreateDropdown(),
                 currentScreen: Modular.to.navigateHistory.last.name,
                 screenItem: 'create',
                 icon: 'assets/images/icon_plus.svg',

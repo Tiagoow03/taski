@@ -72,7 +72,7 @@ class _TodoPageState extends State<TodoPage> {
             children: [
               if (_handler.store.tasks.isEmpty)
                 EmptyTaskWidget(
-                  onCreateTask: () {},
+                  onCreateTask: () => _handler.appStore.openCreateDropdown(),
                 )
               else
                 ListView.builder(

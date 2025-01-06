@@ -1,7 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:taski/core/app_store/app_store.dart';
 import 'package:taski/features/done/presenter/page/done_page.dart';
-import 'package:taski/features/home/home_page.dart';
+import 'package:taski/features/home/presenter/home_page.dart';
 import 'package:taski/features/search/presenter/page/search_page.dart';
 import 'package:taski/features/todo/presenter/handler/todo_handler.dart';
 import 'package:taski/features/todo/presenter/store/todo_store.dart';

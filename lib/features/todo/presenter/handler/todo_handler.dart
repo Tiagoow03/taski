@@ -1,13 +1,17 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/features/todo/domain/entities/task.dart';
+import 'package:taski/core/app_store/app_store.dart';
 import 'package:taski/features/todo/presenter/store/todo_store.dart';
 
 class TodoHandler {
-  TodoHandler();
+  final AppStore _appStore;
+
+  TodoHandler(this._appStore);
 
   final TodoStore _store = Modular.get();
 
   TodoStore get store => _store;
+
+  AppStore get appStore => _appStore;
 
   Future<void> initialize() async {
     // _store.addTask(
