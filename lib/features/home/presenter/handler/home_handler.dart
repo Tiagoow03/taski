@@ -1,14 +1,36 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/features/todo/presenter/store/todo_store.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:taski/core/app_store/app_store.dart';
+import 'package:taski/features/domain/entities/task.dart';
+import 'package:taski/features/domain/usecase/i_task_usecase.dart';
 
-class TodoHandler {
-  TodoHandler();
+class HomeHandler {
+  final AppStore _appStore;
 
-  final TodoStore _store = Modular.get();
+  HomeHandler(this._appStore);
 
-  TodoStore get store => _store;
+  final ITaskUseCase _taskUseCase = Modular.get();
 
-  Future<void> initialize() async {}
+  AppStore get appStore => _appStore;
 
-  void dispose() => _store.dispose();
+  Database? _database;
+
+  Future<void> initialize() async {
+    _database = await _taskUseCase.connectDatabase('taski.db');
+
+    await _taskUseCase.insertTask(
+      Task(
+        title: 'Estudar Flutter',
+        description: 'Estudar Flutter para melhorar minhas habilidades',
+        date: DateTime.now().toIso8601String(),
+        isDone: false,
+      ),
+    );
+  }
+
+  void dispose() {
+    if (_database != null) {
+      _taskUseCase.closeDatabase(_database!);
+    }
+  }
 }

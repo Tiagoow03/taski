@@ -1,5 +1,5 @@
 import 'package:mobx/mobx.dart';
-import 'package:taski/features/todo/domain/entities/task.dart';
+import 'package:taski/features/domain/entities/task.dart';
 
 part 'todo_store.g.dart';
 

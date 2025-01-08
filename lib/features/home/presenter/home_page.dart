@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/core/app_store/app_store.dart';
+import 'package:taski/features/home/presenter/handler/home_handler.dart';
 import 'package:taski/features/home/presenter/widgets/app_bar.dart';
 import 'package:taski/features/home/presenter/widgets/item_bar.dart';
 
@@ -12,16 +12,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final AppStore _appStore = Modular.get();
+  final HomeHandler _handler = Modular.get();
 
   @override
   void initState() {
     super.initState();
+    _handler.initialize();
   }
 
   @override
   Widget build(BuildContext context) {
-    _appStore.setContext(context);
+    _handler.appStore.setContext(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 label: 'Todo',
               ),
               ItemNavigationBar(
-                onTap: () => _appStore.openCreateDropdown(),
+                onTap: () => _handler.appStore.openCreateDropdown(),
                 currentScreen: Modular.to.navigateHistory.last.name,
                 screenItem: 'create',
                 icon: 'assets/images/icon_plus.svg',
