@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:taski/features/domain/entities/task.dart';
+import 'package:taski/domain/entities/task.dart';
 
 abstract interface class ITaskDatasource {
   Future<bool> checkDatabaseExists(String dbName);

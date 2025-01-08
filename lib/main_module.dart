@@ -1,15 +1,15 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/core/app_store/app_store.dart';
+import 'package:taski/interfaces/ui/store/app_store.dart';
 import 'package:taski/core/database/database_provider.dart';
-import 'package:taski/features/domain/datasource/i_task_datasource.dart';
-import 'package:taski/features/domain/repository/i_task_repository.dart';
-import 'package:taski/features/domain/usecase/i_task_usecase.dart';
+import 'package:taski/domain/datasource/i_task_datasource.dart';
+import 'package:taski/domain/repository/i_task_repository.dart';
+import 'package:taski/domain/usecase/i_task_usecase.dart';
 import 'package:taski/features/done/presenter/page/done_page.dart';
-import 'package:taski/features/home/presenter/handler/home_handler.dart';
-import 'package:taski/features/home/presenter/home_page.dart';
-import 'package:taski/features/infra/datasource/task_datasource.dart';
-import 'package:taski/features/infra/repository/task_repository.dart';
-import 'package:taski/features/infra/usecase/task_usecase.dart';
+import 'package:taski/interfaces/ui/handler/app_handler.dart';
+import 'package:taski/interfaces/ui/app_ui.dart';
+import 'package:taski/infra/datasource/task_datasource.dart';
+import 'package:taski/infra/repository/task_repository.dart';
+import 'package:taski/infra/usecase/task_usecase.dart';
 import 'package:taski/features/search/presenter/page/search_page.dart';
 import 'package:taski/features/todo/presenter/handler/todo_handler.dart';
 import 'package:taski/features/todo/presenter/store/todo_store.dart';
@@ -21,7 +21,7 @@ class MainModule extends Module {
     i.addLazySingleton(AppStore.new);
     i.addLazySingleton(TodoStore.new);
 
-    i.addLazySingleton(HomeHandler.new);
+    i.addLazySingleton(AppUIHandler.new);
     i.addLazySingleton(TodoHandler.new);
 
     i.addLazySingleton<DatabaseProvider>(DatabaseProvider.new);
@@ -36,7 +36,7 @@ class MainModule extends Module {
       '/',
       transition: TransitionType.fadeIn,
       duration: const Duration(seconds: 0),
-      child: (context) => HomePage(),
+      child: (context) => AppUI(),
       children: [
         ChildRoute(
           '/todo',

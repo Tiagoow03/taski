@@ -1,12 +1,12 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:taski/core/app_store/app_store.dart';
-import 'package:taski/features/domain/usecase/i_task_usecase.dart';
+import 'package:taski/interfaces/ui/store/app_store.dart';
+import 'package:taski/domain/usecase/i_task_usecase.dart';
 
-class HomeHandler {
+class AppUIHandler {
   final AppStore _appStore;
 
-  HomeHandler(this._appStore);
+  AppUIHandler(this._appStore);
 
   final ITaskUseCase _taskUseCase = Modular.get();
 

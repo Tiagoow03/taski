@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:taski/features/domain/entities/task.dart';
+import 'package:taski/domain/entities/task.dart';
 
 abstract interface class ITaskUseCase {
   Future<Database> connectDatabase(String dbName);

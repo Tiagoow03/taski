@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:taski/features/domain/entities/task.dart';
-import 'package:taski/features/domain/repository/i_task_repository.dart';
-import 'package:taski/features/domain/usecase/i_task_usecase.dart';
+import 'package:taski/domain/entities/task.dart';
+import 'package:taski/domain/repository/i_task_repository.dart';
+import 'package:taski/domain/usecase/i_task_usecase.dart';
 
 class TaskUseCase implements ITaskUseCase {
   final ITaskRepository _repository;

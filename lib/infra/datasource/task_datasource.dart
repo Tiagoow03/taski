@@ -1,7 +1,7 @@
 import 'package:path/path.dart';
 import 'package:taski/core/database/database_provider.dart';
-import 'package:taski/features/domain/datasource/i_task_datasource.dart';
-import 'package:taski/features/domain/entities/task.dart';
+import 'package:taski/domain/datasource/i_task_datasource.dart';
+import 'package:taski/domain/entities/task.dart';
 import 'package:sqflite/sqflite.dart';
 
 class TaskDatasource implements ITaskDatasource {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taski/features/home/presenter/widgets/item_bar.dart';
+import 'package:taski/interfaces/ui/widgets/nav_bar/item_bar.dart';
 
 class MyNavBar extends StatelessWidget {
   final void Function(String screen) onNavigate;

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/features/home/presenter/handler/home_handler.dart';
-import 'package:taski/features/home/presenter/widgets/app_bar.dart';
-import 'package:taski/features/home/presenter/widgets/nav_bar.dart';
+import 'package:taski/interfaces/ui/handler/app_handler.dart';
+import 'package:taski/interfaces/ui/widgets/app_bar.dart';
+import 'package:taski/interfaces/ui/widgets/nav_bar/nav_bar.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class AppUI extends StatefulWidget {
+  const AppUI({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<AppUI> createState() => _AppUIState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeHandler _handler = Modular.get();
+class _AppUIState extends State<AppUI> {
+  final AppUIHandler _handler = Modular.get();
 
   @override
   void initState() {
@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
               Modular.to.navigate(screen);
               _handler.appStore.setCurrentScreen(screen);
             },
-            onCreate: () => _handler.appStore.openCreateDropdown(),
+            onCreate: () => _handler.appStore.openCreateDropdown(
+              () {},
+            ),
             currentScreen: _handler.appStore.currentScreen,
           );
         },

@@ -72,23 +72,23 @@ class _TodoPageState extends State<TodoPage> {
           Expanded(
             child: Stack(
               children: [
-                ListView.builder(
-                  itemCount: _handler.store.tasks.length,
-                  itemBuilder: (context, index) {
-                    if (_handler.store.tasks.isEmpty) {
-                      return EmptyTaskWidget(
-                        onCreateTask: () => _handler.appStore.openCreateDropdown(),
+                if (_handler.store.tasks.isEmpty)
+                  EmptyTaskWidget(
+                    onCreateTask: () => _handler.appStore.openCreateDropdown(_createTask),
+                  )
+                else
+                  ListView.builder(
+                    itemCount: _handler.store.tasks.length,
+                    itemBuilder: (context, index) {
+                      return CardTaskWidget(
+                        isDone: _handler.store.tasks[index].isDone,
+                        title: _handler.store.tasks[index].title,
+                        description: _handler.store.tasks[index].description,
+                        isFirst: index == 0,
+                        isLast: index == _handler.store.tasks.length - 1,
                       );
-                    }
-                    return CardTaskWidget(
-                      isDone: _handler.store.tasks[index].isDone,
-                      title: _handler.store.tasks[index].title,
-                      description: _handler.store.tasks[index].description,
-                      isFirst: index == 0,
-                      isLast: index == _handler.store.tasks.length - 1,
-                    );
-                  },
-                ),
+                    },
+                  ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
@@ -111,5 +111,13 @@ class _TodoPageState extends State<TodoPage> {
         ],
       );
     });
+  }
+
+  Future<void> _createTask() async {
+    try {
+      await _handler.createTask();
+    } finally {
+      if (mounted) Navigator.of(context).pop();
+    }
   }
 }

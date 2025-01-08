@@ -1,7 +1,7 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:taski/features/domain/datasource/i_task_datasource.dart';
-import 'package:taski/features/domain/entities/task.dart';
-import 'package:taski/features/domain/repository/i_task_repository.dart';
+import 'package:taski/domain/datasource/i_task_datasource.dart';
+import 'package:taski/domain/entities/task.dart';
+import 'package:taski/domain/repository/i_task_repository.dart';
 
 class TaskRepository implements ITaskRepository {
   final ITaskDatasource _datasource;

@@ -25,6 +25,39 @@ mixin _$AppStore on AppStoreBase, Store {
     });
   }
 
+  late final _$titleControllerAtom =
+      Atom(name: 'AppStoreBase.titleController', context: context);
+
+  @override
+  TextEditingController get titleController {
+    _$titleControllerAtom.reportRead();
+    return super.titleController;
+  }
+
+  @override
+  set titleController(TextEditingController value) {
+    _$titleControllerAtom.reportWrite(value, super.titleController, () {
+      super.titleController = value;
+    });
+  }
+
+  late final _$descriptionControllerAtom =
+      Atom(name: 'AppStoreBase.descriptionController', context: context);
+
+  @override
+  TextEditingController get descriptionController {
+    _$descriptionControllerAtom.reportRead();
+    return super.descriptionController;
+  }
+
+  @override
+  set descriptionController(TextEditingController value) {
+    _$descriptionControllerAtom.reportWrite(value, super.descriptionController,
+        () {
+      super.descriptionController = value;
+    });
+  }
+
   late final _$_contextAtom =
       Atom(name: 'AppStoreBase._context', context: context);
 
@@ -67,11 +100,11 @@ mixin _$AppStore on AppStoreBase, Store {
   }
 
   @override
-  void openCreateDropdown() {
+  void openCreateDropdown(VoidCallback onCreated) {
     final _$actionInfo = _$AppStoreBaseActionController.startAction(
         name: 'AppStoreBase.openCreateDropdown');
     try {
-      return super.openCreateDropdown();
+      return super.openCreateDropdown(onCreated);
     } finally {
       _$AppStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -80,7 +113,9 @@ mixin _$AppStore on AppStoreBase, Store {
   @override
   String toString() {
     return '''
-currentScreen: ${currentScreen}
+currentScreen: ${currentScreen},
+titleController: ${titleController},
+descriptionController: ${descriptionController}
     ''';
   }
 }
