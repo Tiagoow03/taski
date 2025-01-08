@@ -1,7 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:taski/core/app_store/app_store.dart';
-import 'package:taski/features/domain/entities/task.dart';
 import 'package:taski/features/domain/usecase/i_task_usecase.dart';
 
 class HomeHandler {
@@ -17,15 +16,6 @@ class HomeHandler {
 
   Future<void> initialize() async {
     _database = await _taskUseCase.connectDatabase('taski.db');
-
-    await _taskUseCase.insertTask(
-      Task(
-        title: 'Estudar Flutter',
-        description: 'Estudar Flutter para melhorar minhas habilidades',
-        date: DateTime.now().toIso8601String(),
-        isDone: false,
-      ),
-    );
   }
 
   void dispose() {

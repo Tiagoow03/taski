@@ -7,6 +7,16 @@ part 'app_store.g.dart';
 class AppStore = AppStoreBase with _$AppStore;
 
 abstract class AppStoreBase with Store {
+  // navigation
+
+  @observable
+  String currentScreen = '/todo';
+
+  @action
+  void setCurrentScreen(String screen) => currentScreen = screen;
+
+  // create dropdown
+
   @observable
   BuildContext? _context;
 
