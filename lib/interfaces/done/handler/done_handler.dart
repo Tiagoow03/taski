@@ -3,10 +3,10 @@ import 'package:taski/interfaces/ui/store/app_store.dart';
 import 'package:taski/domain/entities/task.dart';
 import 'package:taski/domain/usecase/i_task_usecase.dart';
 
-class TodoHandler {
+class DoneHandler {
   final AppStore _appStore;
 
-  TodoHandler(this._appStore);
+  DoneHandler(this._appStore);
 
   final ITaskUseCase _taskUseCase = Modular.get();
 

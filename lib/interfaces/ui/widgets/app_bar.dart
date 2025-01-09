@@ -27,7 +27,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           const Spacer(),
           Text(
-            'Person',
+            'John',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.secondary,
@@ -36,16 +36,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           const SizedBox(width: kPaddingDefault / 2),
           Container(
-            height: 35,
-            width: 35,
+            height: 40,
+            width: 40,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Theme.of(context).colorScheme.secondary,
             ),
-            child: Icon(
-              Icons.person_rounded,
-              color: Theme.of(context).colorScheme.primaryContainer,
-              size: 35,
+            child: Image.asset(
+              'assets/images/avatar_example.png',
+              fit: BoxFit.fill,
             ),
           ),
         ],

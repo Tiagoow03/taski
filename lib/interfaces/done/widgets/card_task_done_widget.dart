@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taski/utils/constants.dart';
 
-class CardTaskWidget extends StatelessWidget {
-  const CardTaskWidget({
+class CardTaskDoneWidget extends StatelessWidget {
+  const CardTaskDoneWidget({
     super.key,
     required this.isDone,
     required this.title,
@@ -10,6 +11,7 @@ class CardTaskWidget extends StatelessWidget {
     required this.isFirst,
     required this.isLast,
     required this.onTapDone,
+    required this.onTapDelete,
   });
 
   final bool isDone;
@@ -18,6 +20,7 @@ class CardTaskWidget extends StatelessWidget {
   final bool isFirst;
   final bool isLast;
   final VoidCallback onTapDone;
+  final VoidCallback onTapDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +49,47 @@ class CardTaskWidget extends StatelessWidget {
                   width: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(kPaddingDefault / 2),
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     border: Border.all(
                       width: 2,
                       color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
+                  child: Icon(
+                    Icons.check_rounded,
+                    size: 20,
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
                 ),
               ),
               SizedBox(width: kPaddingDefault),
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.secondary,
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.primaryFixed,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: onTapDelete,
+                      child: SvgPicture.asset(
+                        'assets/images/icon_trash.svg',
+                        height: 16,
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.error,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

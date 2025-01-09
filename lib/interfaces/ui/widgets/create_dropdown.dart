@@ -29,7 +29,7 @@ class _CreateDropdownState extends State<CreateDropdown> {
         padding: const EdgeInsets.all(kPaddingDefault * 2),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(kPaddingDefault * 1.5),
+          borderRadius: BorderRadius.circular(kPaddingDefault * 2.5),
           boxShadow: [
             BoxShadow(
               color: Theme.of(context).colorScheme.inversePrimary,
