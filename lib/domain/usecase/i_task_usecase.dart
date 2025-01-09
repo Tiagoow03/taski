@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:sqflite/sqflite.dart';
 import 'package:taski/domain/entities/task.dart';
 
@@ -8,7 +10,7 @@ abstract interface class ITaskUseCase {
 
   Future<List<Task>> getTasks();
 
-  Future<void> insertTask(Task task);
+  Future<void> insertTask({required Task task, required VoidCallback onConclude});
 
   Future<void> editTask(Task task);
 

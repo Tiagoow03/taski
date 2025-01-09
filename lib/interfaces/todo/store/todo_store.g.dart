@@ -25,21 +25,6 @@ mixin _$TodoStore on TodoStoreBase, Store {
     });
   }
 
-  late final _$tasksAtom = Atom(name: 'TodoStoreBase.tasks', context: context);
-
-  @override
-  ObservableList<Task> get tasks {
-    _$tasksAtom.reportRead();
-    return super.tasks;
-  }
-
-  @override
-  set tasks(ObservableList<Task> value) {
-    _$tasksAtom.reportWrite(value, super.tasks, () {
-      super.tasks = value;
-    });
-  }
-
   late final _$TodoStoreBaseActionController =
       ActionController(name: 'TodoStoreBase', context: context);
 
@@ -49,28 +34,6 @@ mixin _$TodoStore on TodoStoreBase, Store {
         name: 'TodoStoreBase.setIsLoading');
     try {
       return super.setIsLoading(value);
-    } finally {
-      _$TodoStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setTasks(List<Task> value) {
-    final _$actionInfo = _$TodoStoreBaseActionController.startAction(
-        name: 'TodoStoreBase.setTasks');
-    try {
-      return super.setTasks(value);
-    } finally {
-      _$TodoStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void addTask(Task task) {
-    final _$actionInfo = _$TodoStoreBaseActionController.startAction(
-        name: 'TodoStoreBase.addTask');
-    try {
-      return super.addTask(task);
     } finally {
       _$TodoStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -90,8 +53,7 @@ mixin _$TodoStore on TodoStoreBase, Store {
   @override
   String toString() {
     return '''
-isLoading: ${isLoading},
-tasks: ${tasks}
+isLoading: ${isLoading}
     ''';
   }
 }

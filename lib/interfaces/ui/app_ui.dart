@@ -37,7 +37,9 @@ class _AppUIState extends State<AppUI> {
               _handler.appStore.setCurrentScreen(screen);
             },
             onCreate: () => _handler.appStore.openCreateDropdown(
-              () {},
+              () => _handler.createTask(
+                onConclude: () => Navigator.of(context).pop(),
+              ),
             ),
             currentScreen: _handler.appStore.currentScreen,
           );

@@ -4,16 +4,16 @@ import 'package:taski/core/database/database_provider.dart';
 import 'package:taski/domain/datasource/i_task_datasource.dart';
 import 'package:taski/domain/repository/i_task_repository.dart';
 import 'package:taski/domain/usecase/i_task_usecase.dart';
-import 'package:taski/features/done/presenter/page/done_page.dart';
+import 'package:taski/interfaces/done/done_page.dart';
 import 'package:taski/interfaces/ui/handler/app_handler.dart';
 import 'package:taski/interfaces/ui/app_ui.dart';
 import 'package:taski/infra/datasource/task_datasource.dart';
 import 'package:taski/infra/repository/task_repository.dart';
 import 'package:taski/infra/usecase/task_usecase.dart';
-import 'package:taski/features/search/presenter/page/search_page.dart';
-import 'package:taski/features/todo/presenter/handler/todo_handler.dart';
-import 'package:taski/features/todo/presenter/store/todo_store.dart';
-import 'package:taski/features/todo/presenter/todo_page.dart';
+import 'package:taski/interfaces/search/search_page.dart';
+import 'package:taski/interfaces/todo/handler/todo_handler.dart';
+import 'package:taski/interfaces/todo/store/todo_store.dart';
+import 'package:taski/interfaces/todo/todo_page.dart';
 
 class MainModule extends Module {
   @override

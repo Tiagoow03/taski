@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:taski/features/todo/presenter/handler/todo_handler.dart';
-import 'package:taski/features/todo/presenter/widgets/card_task_widget.dart';
-import 'package:taski/features/todo/presenter/widgets/empty_task_widget.dart';
+import 'package:taski/interfaces/todo/handler/todo_handler.dart';
+import 'package:taski/interfaces/todo/widgets/card_task_widget.dart';
+import 'package:taski/interfaces/todo/widgets/empty_task_widget.dart';
 import 'package:taski/utils/constants.dart';
 
 class TodoPage extends StatefulWidget {
@@ -59,7 +59,7 @@ class _TodoPageState extends State<TodoPage> {
                   ),
                 ),
                 Text(
-                  'You’ve got ${_handler.store.tasks.length} tasks to do.',
+                  'You’ve got ${_handler.appStore.tasks.length} tasks to do.',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -72,20 +72,20 @@ class _TodoPageState extends State<TodoPage> {
           Expanded(
             child: Stack(
               children: [
-                if (_handler.store.tasks.isEmpty)
+                if (_handler.appStore.tasks.isEmpty)
                   EmptyTaskWidget(
                     onCreateTask: () => _handler.appStore.openCreateDropdown(_createTask),
                   )
                 else
                   ListView.builder(
-                    itemCount: _handler.store.tasks.length,
+                    itemCount: _handler.appStore.tasks.length,
                     itemBuilder: (context, index) {
                       return CardTaskWidget(
-                        isDone: _handler.store.tasks[index].isDone,
-                        title: _handler.store.tasks[index].title,
-                        description: _handler.store.tasks[index].description,
+                        isDone: _handler.appStore.tasks[index].isDone,
+                        title: _handler.appStore.tasks[index].title,
+                        description: _handler.appStore.tasks[index].description,
                         isFirst: index == 0,
-                        isLast: index == _handler.store.tasks.length - 1,
+                        isLast: index == _handler.appStore.tasks.length - 1,
                       );
                     },
                   ),

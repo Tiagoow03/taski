@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:taski/domain/entities/task.dart';
 import 'package:taski/interfaces/ui/widgets/create_dropdown.dart';
 
 part 'app_store.g.dart';
@@ -43,4 +44,12 @@ abstract class AppStoreBase with Store {
       ),
     );
   }
+
+  // task
+
+  @observable
+  ObservableList<Task> tasks = ObservableList<Task>();
+
+  @action
+  void setTasks(List<Task> value) => tasks = value.asObservable();
 }

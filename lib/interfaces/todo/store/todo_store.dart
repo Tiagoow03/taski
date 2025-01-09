@@ -12,18 +12,8 @@ abstract class TodoStoreBase with Store {
   @action
   void setIsLoading(bool value) => isLoading = value;
 
-  @observable
-  ObservableList<Task> tasks = ObservableList<Task>();
-
-  @action
-  void setTasks(List<Task> value) => tasks = value.asObservable();
-
-  @action
-  void addTask(Task task) => tasks.add(task);
-
   @action
   void dispose() {
     setIsLoading(false);
-    setTasks([]);
   }
 }

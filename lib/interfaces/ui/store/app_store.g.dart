@@ -74,6 +74,21 @@ mixin _$AppStore on AppStoreBase, Store {
     });
   }
 
+  late final _$tasksAtom = Atom(name: 'AppStoreBase.tasks', context: context);
+
+  @override
+  ObservableList<Task> get tasks {
+    _$tasksAtom.reportRead();
+    return super.tasks;
+  }
+
+  @override
+  set tasks(ObservableList<Task> value) {
+    _$tasksAtom.reportWrite(value, super.tasks, () {
+      super.tasks = value;
+    });
+  }
+
   late final _$AppStoreBaseActionController =
       ActionController(name: 'AppStoreBase', context: context);
 
@@ -111,11 +126,23 @@ mixin _$AppStore on AppStoreBase, Store {
   }
 
   @override
+  void setTasks(List<Task> value) {
+    final _$actionInfo = _$AppStoreBaseActionController.startAction(
+        name: 'AppStoreBase.setTasks');
+    try {
+      return super.setTasks(value);
+    } finally {
+      _$AppStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentScreen: ${currentScreen},
 titleController: ${titleController},
-descriptionController: ${descriptionController}
+descriptionController: ${descriptionController},
+tasks: ${tasks}
     ''';
   }
 }
