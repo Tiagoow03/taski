@@ -64,4 +64,10 @@ class TaskDatasource implements ITaskDatasource {
     final db = await _getDatabase('taski.db');
     return await db.delete('task', where: 'id = ?', whereArgs: [id]);
   }
+
+  @override
+  Future<int> deleteTaskCompleted() async {
+    final db = await _getDatabase('taski.db');
+    return await db.delete('task', where: 'isDone = ?', whereArgs: [1]);
+  }
 }

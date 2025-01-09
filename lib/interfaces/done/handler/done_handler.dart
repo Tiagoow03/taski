@@ -31,8 +31,17 @@ class DoneHandler {
         title: task.title,
         description: task.description,
         date: task.date,
+        dateCompleted: task.isDone ? null : DateTime.now().toIso8601String(),
         isDone: !task.isDone,
       ),
     );
+  }
+
+  void deleteTask(int id) async {
+    await _taskUseCase.removeTask(id);
+  }
+
+  void deleteTaskCompleted() async {
+    await _taskUseCase.removeTaskCompleted();
   }
 }

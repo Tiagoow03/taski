@@ -42,14 +42,19 @@ class _DonePageState extends State<DonePage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        'Delete all',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.error,
+                      if (_handler.appStore.tasks.where((task) => task.isDone).isNotEmpty)
+                        GestureDetector(
+                          onTap: () => _handler.deleteTaskCompleted(),
+                          behavior: HitTestBehavior.opaque,
+                          child: Text(
+                            'Delete all',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ],
@@ -73,8 +78,8 @@ class _DonePageState extends State<DonePage> {
                         final filteredTasks = _handler.appStore.tasks.where((task) => task.isDone).toList();
 
                         filteredTasks.sort((a, b) {
-                          DateTime dateA = DateTime.parse(a.date);
-                          DateTime dateB = DateTime.parse(b.date);
+                          DateTime dateA = DateTime.parse(a.dateCompleted ?? DateTime.now().toIso8601String());
+                          DateTime dateB = DateTime.parse(b.dateCompleted ?? DateTime.now().toIso8601String());
                           return dateB.compareTo(dateA);
                         });
 
@@ -85,7 +90,7 @@ class _DonePageState extends State<DonePage> {
                           isFirst: index == 0,
                           isLast: index == filteredTasks.length - 1,
                           onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
-                          onTapDelete: () {},
+                          onTapDelete: () => _handler.deleteTask(filteredTasks[index].id!),
                         );
                       },
                     ),

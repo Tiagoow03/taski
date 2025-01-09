@@ -31,6 +31,7 @@ class TodoHandler {
         title: task.title,
         description: task.description,
         date: task.date,
+        dateCompleted: task.isDone ? null : DateTime.now().toIso8601String(),
         isDone: !task.isDone,
       ),
     );

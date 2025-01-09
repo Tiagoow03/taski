@@ -46,4 +46,9 @@ class TaskRepository implements ITaskRepository {
   Future<void> removeTask(int id) async {
     await _datasource.deleteTask(id);
   }
+
+  @override
+  Future<void> removeTaskCompleted() async {
+    await _datasource.deleteTaskCompleted();
+  }
 }

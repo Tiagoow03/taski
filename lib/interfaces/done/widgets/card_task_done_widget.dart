@@ -82,7 +82,7 @@ class CardTaskDoneWidget extends StatelessWidget {
                       onTap: onTapDelete,
                       child: SvgPicture.asset(
                         'assets/images/icon_trash.svg',
-                        height: 16,
+                        height: 18,
                         colorFilter: ColorFilter.mode(
                           Theme.of(context).colorScheme.error,
                           BlendMode.srcIn,

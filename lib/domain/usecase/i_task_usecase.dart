@@ -17,4 +17,6 @@ abstract interface class ITaskUseCase {
   Future<void> editTask(Task task);
 
   Future<void> removeTask(int id);
+
+  Future<void> removeTaskCompleted();
 }

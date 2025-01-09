@@ -92,6 +92,27 @@ class TaskUseCase implements ITaskUseCase {
 
   @override
   Future<void> removeTask(int id) async {
-    return await _repository.removeTask(id);
+    try {
+      await _repository.removeTask(id);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erro ao deletar tarefa!\n Erro: $e');
+      }
+    } finally {
+      await getTasks();
+    }
+  }
+
+  @override
+  Future<void> removeTaskCompleted() async {
+    try {
+      await _repository.removeTaskCompleted();
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erro ao deletar tarefas concluídas!\n Erro: $e');
+      }
+    } finally {
+      await getTasks();
+    }
   }
 }

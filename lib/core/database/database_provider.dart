@@ -11,9 +11,10 @@ class DatabaseProvider {
         await db.execute('''
           CREATE TABLE task (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            date TEXT,
-            isDone INTEGER,
-            title TEXT,
+            date TEXT NOT NULL,
+            dateCompleted TEXT,
+            isDone INTEGER NOT NULL,
+            title TEXT NOT NULL,
             description TEXT
           )
         ''');

@@ -3,6 +3,7 @@ class Task {
   final String title;
   final String description;
   final String date;
+  final String? dateCompleted;
   final bool isDone;
 
   Task({
@@ -10,6 +11,7 @@ class Task {
     required this.title,
     required this.description,
     required this.date,
+    this.dateCompleted,
     required this.isDone,
   });
 
@@ -19,6 +21,7 @@ class Task {
       'title': title,
       'description': description,
       'date': date,
+      'dateCompleted': dateCompleted,
       'isDone': isDone ? 1 : 0,
     };
   }
@@ -29,6 +32,7 @@ class Task {
       title: map['title'],
       description: map['description'],
       date: map['date'],
+      dateCompleted: map['dateCompleted'],
       isDone: map['isDone'] == 1,
     );
   }

@@ -19,4 +19,6 @@ abstract interface class ITaskDatasource {
   Future<int> updateTask(Task task);
 
   Future<int> deleteTask(int id);
+
+  Future<int> deleteTaskCompleted();
 }
