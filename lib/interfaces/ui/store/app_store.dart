@@ -52,4 +52,15 @@ abstract class AppStoreBase with Store {
 
   @action
   void setTasks(List<Task> value) => tasks = value.asObservable();
+
+  // search
+
+  @observable
+  TextEditingController searchController = TextEditingController();
+
+  @observable
+  String searchQuery = '';
+
+  @action
+  void setSearchQuery(String value) => searchQuery = value;
 }

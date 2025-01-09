@@ -46,12 +46,21 @@ class CardTaskWidget extends StatelessWidget {
                   width: 25,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(kPaddingDefault / 2),
-                    color: Theme.of(context).colorScheme.primaryContainer,
+                    color: isDone
+                        ? Theme.of(context).colorScheme.inversePrimary
+                        : Theme.of(context).colorScheme.primaryContainer,
                     border: Border.all(
                       width: 2,
                       color: Theme.of(context).colorScheme.inversePrimary,
                     ),
                   ),
+                  child: isDone
+                      ? Icon(
+                          Icons.check_rounded,
+                          size: 20,
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        )
+                      : null,
                 ),
               ),
               SizedBox(width: kPaddingDefault),

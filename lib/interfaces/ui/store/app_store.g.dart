@@ -89,6 +89,38 @@ mixin _$AppStore on AppStoreBase, Store {
     });
   }
 
+  late final _$searchControllerAtom =
+      Atom(name: 'AppStoreBase.searchController', context: context);
+
+  @override
+  TextEditingController get searchController {
+    _$searchControllerAtom.reportRead();
+    return super.searchController;
+  }
+
+  @override
+  set searchController(TextEditingController value) {
+    _$searchControllerAtom.reportWrite(value, super.searchController, () {
+      super.searchController = value;
+    });
+  }
+
+  late final _$searchQueryAtom =
+      Atom(name: 'AppStoreBase.searchQuery', context: context);
+
+  @override
+  String get searchQuery {
+    _$searchQueryAtom.reportRead();
+    return super.searchQuery;
+  }
+
+  @override
+  set searchQuery(String value) {
+    _$searchQueryAtom.reportWrite(value, super.searchQuery, () {
+      super.searchQuery = value;
+    });
+  }
+
   late final _$AppStoreBaseActionController =
       ActionController(name: 'AppStoreBase', context: context);
 
@@ -137,13 +169,26 @@ mixin _$AppStore on AppStoreBase, Store {
   }
 
   @override
+  void setSearchQuery(String value) {
+    final _$actionInfo = _$AppStoreBaseActionController.startAction(
+        name: 'AppStoreBase.setSearchQuery');
+    try {
+      return super.setSearchQuery(value);
+    } finally {
+      _$AppStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 currentScreen: ${currentScreen},
 titleController: ${titleController},
 descriptionController: ${descriptionController},
 uiContext: ${uiContext},
-tasks: ${tasks}
+tasks: ${tasks},
+searchController: ${searchController},
+searchQuery: ${searchQuery}
     ''';
   }
 }

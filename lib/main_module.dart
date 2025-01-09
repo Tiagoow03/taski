@@ -1,5 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:taski/interfaces/done/handler/done_handler.dart';
+import 'package:taski/interfaces/search/handler/search_handler.dart';
 import 'package:taski/interfaces/ui/store/app_store.dart';
 import 'package:taski/core/database/database_provider.dart';
 import 'package:taski/domain/datasource/i_task_datasource.dart';
@@ -22,6 +23,7 @@ class MainModule extends Module {
 
     i.addLazySingleton(AppUIHandler.new);
     i.addLazySingleton(TodoHandler.new);
+    i.addLazySingleton(SearchHandler.new);
     i.addLazySingleton(DoneHandler.new);
 
     i.addLazySingleton<DatabaseProvider>(DatabaseProvider.new);
