@@ -25,16 +25,16 @@ abstract class AppStoreBase with Store {
   TextEditingController descriptionController = TextEditingController();
 
   @observable
-  BuildContext? _context;
+  BuildContext? uiContext;
 
   @action
-  void setContext(BuildContext context) => _context = context;
+  void setContext(BuildContext context) => uiContext = context;
 
   @action
   void openCreateDropdown(VoidCallback onCreated) {
-    if (_context == null) return;
+    if (uiContext == null) return;
     showModalBottomSheet(
-      context: _context!,
+      context: uiContext!,
       isDismissible: true,
       barrierColor: Colors.transparent,
       builder: (_) => CreateDropdown(

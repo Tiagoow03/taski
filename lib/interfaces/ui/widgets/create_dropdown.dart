@@ -130,7 +130,6 @@ class _CreateDropdownState extends State<CreateDropdown> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      print('Create');
                       if (formKey.currentState?.validate() == false) {
                         return;
                       }

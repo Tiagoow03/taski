@@ -18,7 +18,7 @@ class _TodoPageState extends State<TodoPage> {
 
   @override
   void initState() {
-    if (mounted) super.initState();
+    super.initState();
     _handler.initialize();
   }
 
@@ -48,7 +48,7 @@ class _TodoPageState extends State<TodoPage> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     children: [
                       TextSpan(
-                        text: 'John',
+                        text: 'Person',
                         style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.tertiary),
                       ),
                       TextSpan(
@@ -59,7 +59,7 @@ class _TodoPageState extends State<TodoPage> {
                   ),
                 ),
                 Text(
-                  'You’ve got ${_handler.appStore.tasks.length} tasks to do.',
+                  'You’ve got ${_handler.appStore.tasks.where((task) => !task.isDone).length} tasks to do.',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -72,20 +72,33 @@ class _TodoPageState extends State<TodoPage> {
           Expanded(
             child: Stack(
               children: [
-                if (_handler.appStore.tasks.isEmpty)
+                if (_handler.appStore.tasks.where((task) => !task.isDone).isEmpty)
                   EmptyTaskWidget(
-                    onCreateTask: () => _handler.appStore.openCreateDropdown(_createTask),
+                    onCreateTask: () => _handler.appStore.openCreateDropdown(
+                      () => _handler.createTask(
+                        onConclude: () => Navigator.of(_handler.appStore.uiContext!).pop(),
+                      ),
+                    ),
                   )
                 else
                   ListView.builder(
-                    itemCount: _handler.appStore.tasks.length,
+                    itemCount: _handler.appStore.tasks.where((task) => !task.isDone).length,
                     itemBuilder: (context, index) {
+                      final filteredTasks = _handler.appStore.tasks.where((task) => !task.isDone).toList();
+
+                      filteredTasks.sort((a, b) {
+                        DateTime dateA = DateTime.parse(a.date);
+                        DateTime dateB = DateTime.parse(b.date);
+                        return dateB.compareTo(dateA);
+                      });
+
                       return CardTaskWidget(
-                        isDone: _handler.appStore.tasks[index].isDone,
-                        title: _handler.appStore.tasks[index].title,
-                        description: _handler.appStore.tasks[index].description,
+                        isDone: filteredTasks[index].isDone,
+                        title: filteredTasks[index].title,
+                        description: filteredTasks[index].description,
                         isFirst: index == 0,
-                        isLast: index == _handler.appStore.tasks.length - 1,
+                        isLast: index == filteredTasks.length - 1,
+                        onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
                       );
                     },
                   ),
@@ -111,13 +124,5 @@ class _TodoPageState extends State<TodoPage> {
         ],
       );
     });
-  }
-
-  Future<void> _createTask() async {
-    try {
-      await _handler.createTask();
-    } finally {
-      if (mounted) Navigator.of(context).pop();
-    }
   }
 }

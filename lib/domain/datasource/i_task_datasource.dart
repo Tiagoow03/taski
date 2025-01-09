@@ -10,9 +10,11 @@ abstract interface class ITaskDatasource {
 
   Future<void> closeDatabase(Database database);
 
+  Future<List<Task>> getAllTasks();
+
   Future<int> createTask(Task task);
 
-  Future<List<Task>> getAllTasks();
+  Future<int> markAsDone(Task task);
 
   Future<int> updateTask(Task task);
 

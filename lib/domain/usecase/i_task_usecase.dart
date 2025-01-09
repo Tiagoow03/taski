@@ -12,6 +12,8 @@ abstract interface class ITaskUseCase {
 
   Future<void> insertTask({required Task task, required VoidCallback onConclude});
 
+  Future<void> markAsDone(Task task);
+
   Future<void> editTask(Task task);
 
   Future<void> removeTask(int id);

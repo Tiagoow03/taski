@@ -17,9 +17,9 @@ class TodoHandler {
 
   AppStore get appStore => _appStore;
 
-  Future<void> initialize() async {}
+  void initialize() async {}
 
-  Future<void> createTask() async {
+  void createTask({required Function() onConclude}) async {
     await _taskUseCase.insertTask(
       task: Task(
         title: _appStore.titleController.text,
@@ -27,7 +27,19 @@ class TodoHandler {
         date: DateTime.now().toIso8601String(),
         isDone: false,
       ),
-      onConclude: () {},
+      onConclude: onConclude,
+    );
+  }
+
+  void tapDoneOrUndone(Task task) async {
+    await _taskUseCase.markAsDone(
+      Task(
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        isDone: !task.isDone,
+      ),
     );
   }
 

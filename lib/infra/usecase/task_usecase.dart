@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:taski/domain/entities/task.dart';
 import 'package:taski/domain/repository/i_task_repository.dart';
@@ -19,7 +18,9 @@ class TaskUseCase implements ITaskUseCase {
     try {
       database = await _repository.initializeDatabase(dbName);
     } catch (e) {
-      print('Erro ao conectar ao banco de dados!\n Erro: $e');
+      if (kDebugMode) {
+        print('Erro ao conectar ao banco de dados!\n Erro: $e');
+      }
     } finally {
       if (database != null) {
         await getTasks();
@@ -39,9 +40,11 @@ class TaskUseCase implements ITaskUseCase {
     List<Task> tasks = [];
 
     try {
-      tasks = await _repository.fetchTasks();
+      tasks = await _repository.getTasks();
     } catch (e) {
-      print('Erro ao buscar tarefas!\n Erro: $e');
+      if (kDebugMode) {
+        print('Erro ao buscar tarefas!\n Erro: $e');
+      }
     } finally {
       _appStore.setTasks(tasks);
     }
@@ -57,12 +60,27 @@ class TaskUseCase implements ITaskUseCase {
     try {
       await _repository.addTask(task);
     } catch (e) {
-      print('Erro ao criar tarefa!\n Erro: $e');
+      if (kDebugMode) {
+        print('Erro ao criar tarefa!\n Erro: $e');
+      }
     } finally {
       _appStore.titleController.clear();
       _appStore.descriptionController.clear();
       onConclude();
 
+      await getTasks();
+    }
+  }
+
+  @override
+  Future<void> markAsDone(Task task) async {
+    try {
+      await _repository.markAsDone(task);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erro ao marcar tarefa como concluída!\n Erro: $e');
+      }
+    } finally {
       await getTasks();
     }
   }

@@ -6,9 +6,11 @@ abstract interface class ITaskRepository {
 
   Future<void> closeDatabase(Database database);
 
+  Future<List<Task>> getTasks();
+
   Future<void> addTask(Task task);
 
-  Future<List<Task>> fetchTasks();
+  Future<void> markAsDone(Task task);
 
   Future<void> editTask(Task task);
 

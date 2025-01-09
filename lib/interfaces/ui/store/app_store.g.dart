@@ -58,19 +58,19 @@ mixin _$AppStore on AppStoreBase, Store {
     });
   }
 
-  late final _$_contextAtom =
-      Atom(name: 'AppStoreBase._context', context: context);
+  late final _$uiContextAtom =
+      Atom(name: 'AppStoreBase.uiContext', context: context);
 
   @override
-  BuildContext? get _context {
-    _$_contextAtom.reportRead();
-    return super._context;
+  BuildContext? get uiContext {
+    _$uiContextAtom.reportRead();
+    return super.uiContext;
   }
 
   @override
-  set _context(BuildContext? value) {
-    _$_contextAtom.reportWrite(value, super._context, () {
-      super._context = value;
+  set uiContext(BuildContext? value) {
+    _$uiContextAtom.reportWrite(value, super.uiContext, () {
+      super.uiContext = value;
     });
   }
 
@@ -142,6 +142,7 @@ mixin _$AppStore on AppStoreBase, Store {
 currentScreen: ${currentScreen},
 titleController: ${titleController},
 descriptionController: ${descriptionController},
+uiContext: ${uiContext},
 tasks: ${tasks}
     ''';
   }

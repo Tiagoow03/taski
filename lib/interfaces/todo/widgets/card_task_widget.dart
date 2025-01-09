@@ -9,6 +9,7 @@ class CardTaskWidget extends StatelessWidget {
     required this.description,
     required this.isFirst,
     required this.isLast,
+    required this.onTapDone,
   });
 
   final bool isDone;
@@ -16,6 +17,7 @@ class CardTaskWidget extends StatelessWidget {
   final String description;
   final bool isFirst;
   final bool isLast;
+  final VoidCallback onTapDone;
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,28 @@ class CardTaskWidget extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(kPaddingDefault / 2),
-                  border: Border.all(width: 2, color: Theme.of(context).colorScheme.inversePrimary),
+              GestureDetector(
+                onTap: onTapDone,
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(kPaddingDefault / 2),
+                    color: isDone
+                        ? Theme.of(context).colorScheme.inversePrimary
+                        : Theme.of(context).colorScheme.primaryContainer,
+                    border: Border.all(
+                      width: 2,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                    ),
+                  ),
+                  child: isDone
+                      ? Icon(
+                          Icons.check_rounded,
+                          size: 20,
+                          color: Theme.of(context).colorScheme.primaryContainer,
+                        )
+                      : SizedBox.shrink(),
                 ),
               ),
               SizedBox(width: kPaddingDefault),

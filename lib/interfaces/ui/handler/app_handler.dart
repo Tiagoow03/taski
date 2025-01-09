@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:taski/domain/entities/task.dart';

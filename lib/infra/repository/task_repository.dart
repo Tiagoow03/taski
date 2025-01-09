@@ -23,13 +23,18 @@ class TaskRepository implements ITaskRepository {
   }
 
   @override
+  Future<List<Task>> getTasks() async {
+    return await _datasource.getAllTasks();
+  }
+
+  @override
   Future<void> addTask(Task task) async {
     await _datasource.createTask(task);
   }
 
   @override
-  Future<List<Task>> fetchTasks() async {
-    return await _datasource.getAllTasks();
+  Future<void> markAsDone(Task task) async {
+    await _datasource.markAsDone(task);
   }
 
   @override
