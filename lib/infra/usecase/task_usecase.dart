@@ -32,7 +32,13 @@ class TaskUseCase implements ITaskUseCase {
 
   @override
   Future<void> closeDatabase(Database database) async {
-    return await _repository.closeDatabase(database);
+    try {
+      await _repository.closeDatabase(database);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erro ao fechar banco de dados!\n Erro: $e');
+      }
+    }
   }
 
   @override
