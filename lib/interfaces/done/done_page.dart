@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:taski/interfaces/components/empty_task_widget.dart';
 import 'package:taski/interfaces/done/handler/done_handler.dart';
-import 'package:taski/interfaces/done/widgets/card_task_done_widget.dart';
-import 'package:taski/interfaces/done/widgets/empty_task_done_widget.dart';
+import 'package:taski/interfaces/components/card_task_widget.dart';
 import 'package:taski/utils/constants.dart';
 
 class DonePage extends StatefulWidget {
@@ -64,7 +64,8 @@ class _DonePageState extends State<DonePage> {
               child: Stack(
                 children: [
                   if (_handler.appStore.tasks.where((task) => task.isDone).isEmpty)
-                    EmptyTaskDoneWidget(
+                    EmptyTaskWidget(
+                      description: 'All your completed tasks will appear here.',
                       onCreateTask: () => _handler.appStore.openCreateDropdown(
                         () => _handler.createTask(
                           onConclude: () => Navigator.of(_handler.appStore.uiContext!).pop(),
@@ -83,12 +84,13 @@ class _DonePageState extends State<DonePage> {
                           return dateB.compareTo(dateA);
                         });
 
-                        return CardTaskDoneWidget(
+                        return CardTaskWidget(
                           isDone: filteredTasks[index].isDone,
                           title: filteredTasks[index].title,
                           description: filteredTasks[index].description,
                           isFirst: index == 0,
                           isLast: index == filteredTasks.length - 1,
+                          isScreenDone: true,
                           onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
                           onTapDelete: () => _handler.deleteTask(filteredTasks[index].id!),
                         );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:taski/interfaces/components/empty_task_widget.dart';
 import 'package:taski/interfaces/todo/handler/todo_handler.dart';
-import 'package:taski/interfaces/todo/widgets/card_task_widget.dart';
-import 'package:taski/interfaces/todo/widgets/empty_task_widget.dart';
+import 'package:taski/interfaces/components/card_task_widget.dart';
 import 'package:taski/utils/constants.dart';
 
 class TodoPage extends StatefulWidget {
@@ -63,6 +63,7 @@ class _TodoPageState extends State<TodoPage> {
                 children: [
                   if (_handler.appStore.tasks.where((task) => !task.isDone).isEmpty)
                     EmptyTaskWidget(
+                      description: 'You have no task listed.',
                       onCreateTask: () => _handler.appStore.openCreateDropdown(
                         () => _handler.createTask(
                           onConclude: () => Navigator.of(_handler.appStore.uiContext!).pop(),

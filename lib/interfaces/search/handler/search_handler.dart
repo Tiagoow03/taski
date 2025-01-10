@@ -12,6 +12,18 @@ class SearchHandler {
 
   AppStore get appStore => _appStore;
 
+  void createTask({required Function() onConclude}) async {
+    await _taskUseCase.insertTask(
+      task: Task(
+        title: _appStore.titleController.text,
+        description: _appStore.descriptionController.text,
+        date: DateTime.now().toIso8601String(),
+        isDone: false,
+      ),
+      onConclude: onConclude,
+    );
+  }
+
   void tapDoneOrUndone(Task task) async {
     await _taskUseCase.markAsDone(
       Task(

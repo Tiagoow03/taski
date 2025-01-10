@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taski/utils/constants.dart';
 
 class CardTaskWidget extends StatelessWidget {
@@ -9,7 +10,9 @@ class CardTaskWidget extends StatelessWidget {
     required this.description,
     required this.isFirst,
     required this.isLast,
+    this.isScreenDone = false,
     required this.onTapDone,
+    this.onTapDelete,
   });
 
   final bool isDone;
@@ -17,7 +20,9 @@ class CardTaskWidget extends StatelessWidget {
   final String description;
   final bool isFirst;
   final bool isLast;
+  final bool isScreenDone;
   final VoidCallback onTapDone;
+  final VoidCallback? onTapDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,7 @@ class CardTaskWidget extends StatelessWidget {
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: kPaddingDefault,
             children: [
               GestureDetector(
                 onTap: onTapDone,
@@ -63,15 +69,40 @@ class CardTaskWidget extends StatelessWidget {
                       : null,
                 ),
               ),
-              SizedBox(width: kPaddingDefault),
-              Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.secondary,
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: isScreenDone
+                            ? Theme.of(context).colorScheme.primaryFixed
+                            : Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: isScreenDone ? onTapDelete : () {},
+                      child: SvgPicture.asset(
+                        'assets/images/${isScreenDone ? 'icon_trash' : 'icon_dots'}.svg',
+                        height: isScreenDone ? 18 : null,
+                        width: isScreenDone ? null : 20,
+                        colorFilter: ColorFilter.mode(
+                          isScreenDone
+                              ? Theme.of(context).colorScheme.error
+                              : description != ''
+                                  ? Colors.transparent
+                                  : Theme.of(context).colorScheme.inversePrimary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
