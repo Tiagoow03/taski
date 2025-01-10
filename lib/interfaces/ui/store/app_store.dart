@@ -31,7 +31,7 @@ abstract class AppStoreBase with Store {
   void setContext(BuildContext context) => uiContext = context;
 
   @action
-  void openCreateDropdown(VoidCallback onCreated) {
+  void openCreateDropdown(VoidCallback onTap, {bool isEdit = false}) {
     if (uiContext == null) return;
     showModalBottomSheet(
       context: uiContext!,
@@ -40,7 +40,8 @@ abstract class AppStoreBase with Store {
       builder: (_) => CreateDropdown(
         titleController: titleController,
         descriptionController: descriptionController,
-        onCreated: onCreated,
+        isEdit: isEdit,
+        onTap: onTap,
       ),
     );
   }

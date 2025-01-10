@@ -3,8 +3,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taski/interfaces/components/empty_task_widget.dart';
-import 'package:taski/interfaces/search/handler/search_handler.dart';
 import 'package:taski/interfaces/components/card_task_widget.dart';
+import 'package:taski/interfaces/components/shadow_list_widget.dart';
+import 'package:taski/interfaces/ui/handler/app_handler.dart';
 import 'package:taski/utils/constants.dart';
 
 class SearchPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final SearchHandler _handler = Modular.get();
+  final AppUIHandler _handler = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -123,26 +124,12 @@ class _SearchPageState extends State<SearchPage> {
                                     description: filteredTasks[index].description,
                                     isFirst: index == 0,
                                     isLast: index == filteredTasks.length - 1,
+                                    onTapCard: () => _handler.openDropDownEdit(filteredTasks[index]),
                                     onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
                                   );
                                 },
                               ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.white.withValues(alpha: 0.0),
-                              Colors.white.withValues(alpha: 0.8),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    ShadowListWidget(),
                   ],
                 ),
               ),

@@ -147,11 +147,11 @@ mixin _$AppStore on AppStoreBase, Store {
   }
 
   @override
-  void openCreateDropdown(VoidCallback onCreated) {
+  void openCreateDropdown(VoidCallback onTap, {bool isEdit = false}) {
     final _$actionInfo = _$AppStoreBaseActionController.startAction(
         name: 'AppStoreBase.openCreateDropdown');
     try {
-      return super.openCreateDropdown(onCreated);
+      return super.openCreateDropdown(onTap, isEdit: isEdit);
     } finally {
       _$AppStoreBaseActionController.endAction(_$actionInfo);
     }

@@ -86,8 +86,20 @@ class TaskUseCase implements ITaskUseCase {
   }
 
   @override
-  Future<void> editTask(Task task) async {
-    return await _repository.editTask(task);
+  Future<void> editTask({required Task task, required VoidCallback onConclude}) async {
+    try {
+      await _repository.editTask(task);
+    } catch (e) {
+      if (kDebugMode) {
+        print('Erro ao editar tarefa!\n Erro: $e');
+      }
+    } finally {
+      _appStore.titleController.clear();
+      _appStore.descriptionController.clear();
+      onConclude();
+
+      await getTasks();
+    }
   }
 
   @override

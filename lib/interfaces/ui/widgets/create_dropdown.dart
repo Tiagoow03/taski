@@ -7,12 +7,14 @@ class CreateDropdown extends StatefulWidget {
     super.key,
     required this.titleController,
     required this.descriptionController,
-    required this.onCreated,
+    required this.isEdit,
+    required this.onTap,
   });
 
   final TextEditingController titleController;
   final TextEditingController descriptionController;
-  final VoidCallback onCreated;
+  final bool isEdit;
+  final VoidCallback onTap;
 
   @override
   State<CreateDropdown> createState() => _CreateDropdownState();
@@ -133,7 +135,7 @@ class _CreateDropdownState extends State<CreateDropdown> {
                       if (formKey.currentState?.validate() == false) {
                         return;
                       }
-                      widget.onCreated();
+                      widget.onTap();
                     },
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
@@ -146,7 +148,7 @@ class _CreateDropdownState extends State<CreateDropdown> {
                       ),
                     ),
                     child: Text(
-                      'Create',
+                      widget.isEdit ? 'Edit' : 'Create',
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.tertiary,
                         fontSize: 16,

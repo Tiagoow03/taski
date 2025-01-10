@@ -50,13 +50,23 @@ class TaskDatasource implements ITaskDatasource {
   @override
   Future<int> markAsDone(Task task) async {
     final db = await _getDatabase('taski.db');
-    return await db.update('task', task.toMap(), where: 'id = ?', whereArgs: [task.id]);
+    return await db.update(
+      'task',
+      task.toMap(),
+      where: 'id = ?',
+      whereArgs: [task.id],
+    );
   }
 
   @override
   Future<int> updateTask(Task task) async {
     final db = await _getDatabase('taski.db');
-    return await db.update('task', task.toMap(), where: 'id = ?', whereArgs: [task.id]);
+    return await db.update(
+      'task',
+      {'title': task.title, 'description': task.description},
+      where: 'id = ?',
+      whereArgs: [task.id],
+    );
   }
 
   @override

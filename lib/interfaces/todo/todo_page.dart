@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:taski/interfaces/components/empty_task_widget.dart';
-import 'package:taski/interfaces/todo/handler/todo_handler.dart';
 import 'package:taski/interfaces/components/card_task_widget.dart';
+import 'package:taski/interfaces/components/shadow_list_widget.dart';
+import 'package:taski/interfaces/ui/handler/app_handler.dart';
 import 'package:taski/utils/constants.dart';
 
 class TodoPage extends StatefulWidget {
@@ -14,7 +15,7 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
-  final TodoHandler _handler = Modular.get();
+  final AppUIHandler _handler = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -88,26 +89,12 @@ class _TodoPageState extends State<TodoPage> {
                           description: filteredTasks[index].description,
                           isFirst: index == 0,
                           isLast: index == filteredTasks.length - 1,
+                          onTapCard: () => _handler.openDropDownEdit(filteredTasks[index]),
                           onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
                         );
                       },
                     ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withValues(alpha: 0.0),
-                            Colors.white.withValues(alpha: 0.8),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  ShadowListWidget(),
                 ],
               ),
             ),

@@ -31,6 +31,44 @@ class AppUIHandler {
     );
   }
 
+  void openDropDownEdit(Task task) async {
+    _appStore.titleController.text = task.title;
+    _appStore.descriptionController.text = task.description;
+    _appStore.openCreateDropdown(
+      () => editTask(
+        task,
+        onConclude: () => Modular.to.pop(),
+      ),
+      isEdit: true,
+    );
+  }
+
+  void editTask(Task task, {required Function() onConclude}) async {
+    await _taskUseCase.editTask(
+      task: Task(
+        id: task.id,
+        title: _appStore.titleController.text,
+        description: _appStore.descriptionController.text,
+        date: task.date,
+        isDone: task.isDone,
+      ),
+      onConclude: onConclude,
+    );
+  }
+
+  void tapDoneOrUndone(Task task) async {
+    await _taskUseCase.markAsDone(
+      Task(
+        id: task.id,
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        dateCompleted: task.isDone ? null : DateTime.now().toIso8601String(),
+        isDone: !task.isDone,
+      ),
+    );
+  }
+
   void dispose() {
     if (_database != null) {
       _taskUseCase.closeDatabase(_database!);

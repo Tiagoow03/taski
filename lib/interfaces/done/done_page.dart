@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:taski/interfaces/components/empty_task_widget.dart';
+import 'package:taski/interfaces/components/shadow_list_widget.dart';
 import 'package:taski/interfaces/done/handler/done_handler.dart';
 import 'package:taski/interfaces/components/card_task_widget.dart';
+import 'package:taski/interfaces/ui/handler/app_handler.dart';
 import 'package:taski/utils/constants.dart';
 
 class DonePage extends StatefulWidget {
@@ -15,6 +17,7 @@ class DonePage extends StatefulWidget {
 
 class _DonePageState extends State<DonePage> {
   final DoneHandler _handler = Modular.get();
+  final AppUIHandler _appHandler = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +70,7 @@ class _DonePageState extends State<DonePage> {
                     EmptyTaskWidget(
                       description: 'All your completed tasks will appear here.',
                       onCreateTask: () => _handler.appStore.openCreateDropdown(
-                        () => _handler.createTask(
+                        () => _appHandler.createTask(
                           onConclude: () => Navigator.of(_handler.appStore.uiContext!).pop(),
                         ),
                       ),
@@ -91,27 +94,13 @@ class _DonePageState extends State<DonePage> {
                           isFirst: index == 0,
                           isLast: index == filteredTasks.length - 1,
                           isScreenDone: true,
-                          onTapDone: () => _handler.tapDoneOrUndone(filteredTasks[index]),
+                          onTapCard: () => _appHandler.openDropDownEdit(filteredTasks[index]),
+                          onTapDone: () => _appHandler.tapDoneOrUndone(filteredTasks[index]),
                           onTapDelete: () => _handler.deleteTask(filteredTasks[index].id!),
                         );
                       },
                     ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.white.withValues(alpha: 0.0),
-                            Colors.white.withValues(alpha: 0.8),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  ShadowListWidget(),
                 ],
               ),
             ),
