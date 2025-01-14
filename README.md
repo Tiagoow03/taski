@@ -1,16 +1,65 @@
-# taski
+# TASKI - Desafio: Criação de um Aplicativo de Tarefas
 
-A new Flutter project.
+## Objetivo
 
-## Getting Started
+Criar um aplicativo para buscar filmes e séries, com funcionalidades para visualizar detalhes dos filmes, marcar favoritos e consultar a lista de favoritos.
 
-This project is a starting point for a Flutter application.
+## Requisitos Funcionais
 
-A few resources to get you started if this is your first Flutter project:
+O projeto foi construído utilizando o seguinte layout:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Listagem de tarefas com scroll infinito;
+   
+3. Listagem de tarefas finalizadas;
+   
+5. Criar tarefa;
+   
+7. Os dados deverão ser salvo local utilizando um banco de dados (sqlite, Hive, etc...);
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Requisitos Técnicos
+
+1. O projeto deve ser construído utilizando Flutter;
+
+2. O aplicativo deve ser offline first;
+
+4. O projeto deve ser construído utilizando o layout disponibilizado na descrição do teste;
+
+5. Criar um arquivo README explicando como executar o projeto.
+
+## Requisitos Técnicos (não obrigatórios)
+
+1. Clean Code
+   
+3. Arquitetura MVVM
+   
+5. Testes automatizados
+
+## Instruções para Rodar o Aplicativo
+
+### Pré-requisitos:
+
+- Flutter instalado na máquina ([Instalação do Flutter](https://flutter.dev/docs/get-started/install))
+- O aplicativo em questão foi feito usando a versão stable 3.27.0
+
+### Passos:
+
+1.  **Clone o repositório:**
+
+    ```sh
+    git clone https://github.com/Tiagoow03/taski
+    ```
+
+2.  **Instale as dependências:**
+
+    ```sh
+    flutter pub get
+    ```
+
+4.  **Execute o aplicativo:**
+    ```sh
+    flutter run
+    ```
+
+### Observações:
+
+- Certifique-se de que o emulador/simulador ou dispositivo físico está configurado e conectado.
