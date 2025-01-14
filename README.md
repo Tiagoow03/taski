@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Criar um aplicativo para buscar filmes e séries, com funcionalidades para visualizar detalhes dos filmes, marcar favoritos e consultar a lista de favoritos.
+Criar um aplicativo para criar tarefas, com funcionalidades para visualizar detalhes de cada uma, marcar como concluída, deletar caso desejado e consultar a lista de tarefas.
 
 ## Requisitos Funcionais
 
